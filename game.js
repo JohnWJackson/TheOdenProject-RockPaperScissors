@@ -45,27 +45,4 @@ function playRound(playerSelection, cpuSelection) {
   }
 }
 
-function game() {
-  let cpuScore = 0;
-  let playerScore = 0;
-  while (playerScore < 3 && cpuScore < 3) {
-    const playerChoice = prompt("Rock, Paper, or Scissors?");
-    const cpuChoice = computerPlay();
-    const result = playRound(playerChoice, cpuChoice);
-    if (result[0] == 1) {
-      cpuScore++;
-    }
-    if (result[0] == 2) {
-      playerScore++;
-    }
-    console.log(result[1]);
-  }
-  if (cpuScore > playerScore) {
-    return "You Lost!";
-  }
-  else {
-    return "You Won!";
-  }
-}
-
 console.log(game());
