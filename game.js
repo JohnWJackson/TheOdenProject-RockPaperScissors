@@ -1,3 +1,6 @@
+var PLAYER_SCORE = 0;
+var CPU_SCORE = 0;
+
 var btns = document.querySelectorAll('button');
 btns.forEach(btn => btn.addEventListener('click', game));
 
@@ -6,8 +9,27 @@ function game(e) {
   const cpuChoice = computerPlay()
   displayChoices(playerChoice, cpuChoice);
 
-  const result = playRound(playerChoice, cpuChoice);
-  displayResult(result);
+  const roundResult = playRound(playerChoice, cpuChoice);
+  displayResult(roundResult);
+  
+  switch (roundResult[0]) {
+    case 0: break;
+    case 1: CPU_SCORE++; break;
+    case 2: PLAYER_SCORE++; break;
+  }
+
+  displayScore(PLAYER_SCORE, CPU_SCORE);
+  
+  if (CPU_SCORE > 2) {
+    declareWinner("Computer");
+    CPU_SCORE = 0;
+    PLAYER_SCORE = 0;
+  }
+  if (PLAYER_SCORE > 2) {
+    declareWinner("Player");
+    CPU_SCORE = 0;
+    PLAYER_SCORE = 0;
+  }
 }
 
 function computerPlay() {
@@ -64,8 +86,28 @@ function displayChoices(player, cpu) {
   cpudiv.textContent = "Computer: " + cpu;
 }
 
+function displayScore(playerScore, cpuScore) {
+  const results = document.querySelector('.results');
+  
+  const playerdiv = document.createElement('div');
+  playerdiv.textContent = "Player Score: " + playerScore;
+  results.appendChild(playerdiv);
+  
+  const cpudiv = document.createElement('div');
+  cpudiv.textContent = "Computer Score: " + cpuScore;
+  results.appendChild(cpudiv);
+}
+
 function displayResult(result) {
   const div = document.querySelector('.results');
   div.textContent = result[1];
+}
+
+function declareWinner(winner) {
+  const results = document.querySelector('.results');
+  
+  const div = document.createElement('div');
+  div.textContent = "The " + winner + " won!";
+  results.appendChild(div);
 }
 
