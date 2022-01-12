@@ -2,9 +2,12 @@ var btns = document.querySelectorAll('button');
 btns.forEach(btn => btn.addEventListener('click', game));
 
 function game(e) {
-  const id = e.target.id;
-  const result = playRound(id, computerPlay());
-  console.log(result[1]);
+  const playerChoice = e.target.id;
+  const cpuChoice = computerPlay()
+  displayChoices(playerChoice, cpuChoice);
+
+  const result = playRound(playerChoice, cpuChoice);
+  displayResult(result);
 }
 
 function computerPlay() {
@@ -54,5 +57,15 @@ function playRound(playerSelection, cpuSelection) {
   }
 }
 
-console.log()
+function displayChoices(player, cpu) {
+  const playerdiv = document.querySelector('.playerChoice');
+  const cpudiv = document.querySelector('.cpuChoice');
+  playerdiv.textContent = "Player: " + player;
+  cpudiv.textContent = "Computer: " + cpu;
+}
+
+function displayResult(result) {
+  const div = document.querySelector('.results');
+  div.textContent = result[1];
+}
 
