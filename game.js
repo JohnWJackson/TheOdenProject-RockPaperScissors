@@ -1,43 +1,52 @@
+var btns = document.querySelectorAll('button');
+btns.forEach(btn => btn.addEventListener('click', game));
+
+function game(e) {
+  const id = e.target.id;
+  const result = playRound(id, computerPlay());
+  console.log(result[1]);
+}
+
 function computerPlay() {
   let random = Math.floor(Math.random() * (3 - 1 + 1) + 1);
   switch (random) {
     case 1: 
-      return "Rock";
+      return "rock";
       break;
     case 2:
-      return "Paper";
+      return "paper";
       break;
     case 3:
-      return "Scissors";
+      return "scissors";
       break;
   }
 }
 
 function playRound(playerSelection, cpuSelection) {
-  const lowerPlayer = playerSelection.toLowerCase();
-  const cpuPlayer = cpuSelection.toLowerCase();
+  console.log(playerSelection);
+  console.log(cpuSelection);
 
-  if (lowerPlayer == cpuPlayer) {
+  if (playerSelection == cpuSelection) {
     return [0, "It's a tie!"];
   }
-  else if (lowerPlayer == "scissors") {
-    if (cpuPlayer == "rock") {
+  else if (playerSelection == "scissors") {
+    if (cpuSelection == "rock") {
       return [1, "You lose. Rock beats scissors."]
     }
-    if (cpuPlayer == "paper") {
+    if (cpuSelection == "paper") {
       return [2, "You win! Scissors beat paper."];
     }
   }
-  else if (lowerPlayer == "paper") {
-    if (cpuPlayer == "rock") {
+  else if (playerSelection == "paper") {
+    if (cpuSelection == "rock") {
       return [2, "You win! Paper beats rock."];
     }
-    if (cpuPlayer == "scissors") {
+    if (cpuSelection == "scissors") {
       return [1, "You lose. Scissors beats paper."];
     }
   }
   else {
-    if (cpuPlayer == "paper") {
+    if (cpuSelection == "paper") {
       return [1, "You lose. Paper beats rock."];
     }
     return [2, "You win! Rock beats scissors."];
@@ -45,4 +54,5 @@ function playRound(playerSelection, cpuSelection) {
   }
 }
 
-console.log(game());
+console.log()
+
